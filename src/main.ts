@@ -1,12 +1,21 @@
+import { run } from "@banjoanton/spa-runner";
 // @ts-ignore isolatedModules
+
+const settingsButtonQuery = '[data-testid="settingsButton"]';
+
 window.onload = () => {
-    main();
+    run(main, {
+        runAtStart: true,
+        urls: ["https://bitbucket.org/Intelpharma/csp-mono/pull-requests/*"],
+        isDebug: true,
+        waitForElement: settingsButtonQuery,
+    });
 };
 
 function main() {
-    const settingsButton = document.querySelector(
-        '[data-testid="settingsButton"]'
-    );
+    if (document.querySelector(".csp-button")) return;
+
+    const settingsButton = document.querySelector(settingsButtonQuery);
 
     if (!settingsButton) return;
 
@@ -18,6 +27,7 @@ function main() {
 
     newButton.textContent = "CSP-mono";
     newButton.style.cursor = "pointer";
+    newButton.classList.add("csp-button");
 
     buttonContainer?.insertAdjacentElement("afterend", newContainer);
 

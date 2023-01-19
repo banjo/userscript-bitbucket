@@ -8,9 +8,7 @@ export default defineConfig({
             entry: "src/main.ts",
             userscript: {
                 namespace: "userscript/astra",
-                match: [
-                    "https://bitbucket.org/Intelpharma/csp-mono/pull-requests/*",
-                ],
+                match: ["https://bitbucket.org/*"],
                 author: "Anton",
                 "run-at": "document-end",
             },
