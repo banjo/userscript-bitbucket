@@ -1,4 +1,5 @@
 import { run } from "@banjoanton/spa-runner";
+import { toast } from "toastler";
 // @ts-ignore isolatedModules
 
 const settingsButtonQuery = '[data-testid="settingsButton"]';
@@ -49,7 +50,10 @@ function addCspButton() {
 
     const settingsButton = document.querySelector(settingsButtonQuery);
 
-    if (!settingsButton) return;
+    if (!settingsButton) {
+        toast("Could not find settings button", { type: "error" });
+        return;
+    }
 
     const buttonContainer = settingsButton.parentElement;
     const newContainer = buttonContainer?.cloneNode(true) as HTMLElement;
@@ -66,17 +70,21 @@ function addCspButton() {
     newButton.addEventListener("click", async () => {
         const message = getBranch();
         navigator.clipboard.writeText(formatMessage(message));
+        toast(`Copied to clipboard in Markdown`, {
+            type: "success",
+            duration: 2000,
+        });
     });
 }
 
 function getBranch() {
     const name =
-        document.querySelector("header form span a")?.parentElement
+        document.querySelector(".css-atqsw9 > span:nth-child(1)")
             ?.textContent ?? "";
 
     return name;
 }
 
 function formatMessage(branch: string): string {
-    return `*S*, _csp-mono_: ${branch}`;
+    return `*S*, _csp-mono_: [${branch}](${window.location.href})`;
 }
