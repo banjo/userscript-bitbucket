@@ -69,7 +69,11 @@ function addCspButton() {
 
     newButton.addEventListener("click", async () => {
         const message = getBranch();
-        navigator.clipboard.writeText(formatMessage(message));
+        const size = prompt("Enter size", "S");
+
+        if (!size) return;
+
+        navigator.clipboard.writeText(formatMessage(message, size));
         toast(`Copied to clipboard in Markdown`, {
             type: "success",
             duration: 2000,
@@ -85,6 +89,6 @@ function getBranch() {
     return name;
 }
 
-function formatMessage(branch: string): string {
-    return `*S*, _csp-mono_: [${branch}](${window.location.href})`;
+function formatMessage(branch: string, size: string): string {
+    return `*${size}*, _csp-mono_: [${branch}](${window.location.href})`;
 }
