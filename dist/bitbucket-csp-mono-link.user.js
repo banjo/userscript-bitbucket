@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name       bitbucket-csp-mono-link
 // @namespace  userscript/astra
-// @version    0.0.3
+// @version    0.0.4
 // @author     Anton
 // @match      https://bitbucket.org/*
 // @run-at     document-end
