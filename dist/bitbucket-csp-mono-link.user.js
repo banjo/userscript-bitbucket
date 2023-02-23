@@ -235,7 +235,7 @@
       const size = prompt("Enter size", "S");
       if (!size)
         return;
-      navigator.clipboard.writeText(formatMessage(message, size));
+      await navigator.clipboard.writeText(formatMessage(message, size));
       toast(`Copied to clipboard in Markdown`, {
         type: "success",
         duration: 2e3
