@@ -70,10 +70,11 @@ function addCspButton() {
 
     newButton.addEventListener("click", async () => {
         const message = getBranch();
-        const size = (await promptler("Enter size", {
-            type: "input",
+        const size = await promptler("Enter size", {
+            type: "text",
             default: "S",
-        })) as string;
+            placeholder: "S",
+        });
 
         if (!size) return;
 

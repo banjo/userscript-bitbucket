@@ -431,8 +431,9 @@
     newButton.addEventListener("click", async () => {
       const message = getBranch();
       const size = await $("Enter size", {
-        type: "input",
-        default: "S"
+        type: "text",
+        default: "S",
+        placeholder: "S"
       });
       if (!size)
         return;
