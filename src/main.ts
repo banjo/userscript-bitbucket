@@ -1,4 +1,5 @@
 import { run } from "@banjoanton/spa-runner";
+import { promptler } from "promptler";
 import { toast } from "toastler";
 // @ts-ignore isolatedModules
 
@@ -69,7 +70,10 @@ function addCspButton() {
 
     newButton.addEventListener("click", async () => {
         const message = getBranch();
-        const size = prompt("Enter size", "S");
+        const size = (await promptler("Enter size", {
+            type: "input",
+            default: "S",
+        })) as string;
 
         if (!size) return;
 

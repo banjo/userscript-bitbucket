@@ -89,6 +89,204 @@
       clearInterval(runInterval);
     };
   };
+  var v = () => typeof window != "undefined";
+  var y = ({ modal: e, resolve: t, value: i }) => {
+    let r = (d) => {
+      e.remove(), t(d);
+    };
+    return { okEvent: () => r(i), cancelEvent: () => r(i), onValue: r };
+  };
+  var k = () => {
+    let e = document.createElement("div");
+    return e.classList.add("banjo-modal"), e.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        display: none;
+    `, e;
+  }, C = () => {
+    let e = document.createElement("div");
+    return e.classList.add("banjo-prompt"), e.style.cssText = `
+        background: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        width: 400px;
+        height: fit-content;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    `, e;
+  }, j = (e) => {
+    let t = document.createElement("div");
+    return t.classList.add("banjo-prompt-header"), t.style.cssText = `
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    `, t.appendChild(document.createTextNode(e)), t;
+  }, T = () => {
+    let e = document.createElement("div");
+    return e.classList.add("banjo-prompt-content"), e.style.cssText = `
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    `, e;
+  }, S = () => {
+    let e = document.createElement("div");
+    return e.classList.add("banjo-prompt-footer"), e.style.cssText = `
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 10px;
+        margin-top: 20px;
+    `, e;
+  }, A = (e, t) => {
+    let i = t === "primary", r = document.createElement("button");
+    return r.classList.add("banjo-prompt-button"), r.style.cssText = `
+        background-color: ${i ? "#007bff" : "#fff"}; 
+        font-weight: bold; 
+        color: ${i ? "#fff" : "#2d3748"}; 
+        padding: 0.5rem 1rem; 
+        border-radius: 0.25rem;
+        border: ${i ? "none" : "1px solid #cbd5e0"};
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);`, r.addEventListener("mouseover", function() {
+      r.style.backgroundColor = i ? "#0056b3" : "#f7fafc";
+    }), r.addEventListener("mouseout", function() {
+      r.style.backgroundColor = i ? "#007bff" : "#fff";
+    }), r.textContent = e, r;
+  }, u = { modal: k, prompt: C, header: j, content: T, footer: S, button: A };
+  var b = (e) => {
+    let t = u.modal();
+    document.body.appendChild(t);
+    let i = u.prompt();
+    t.appendChild(i);
+    let r = u.header(e);
+    i.appendChild(r);
+    let c = u.content();
+    i.appendChild(c);
+    let s = u.footer();
+    i.appendChild(s);
+    let d = u.button("Cancel", "secondary"), n = u.button("OK", "primary");
+    return s.appendChild(d), s.appendChild(n), { modal: t, prompt: i, header: r, content: c, footer: s, cancel: d, ok: n };
+  };
+  function w$1({ options: e, content: t, onValue: i }) {
+    var s, d;
+    let r, c;
+    switch (e.type) {
+      case "select": {
+        let n = document.createElement("select");
+        if (n.classList.add("banjo-prompt-select"), n.style.cssText = `
+                    width: 100%;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                    padding: 10px;
+                    background: #fff;
+                `, n.addEventListener("input", (o) => {
+          r = o.target.value;
+        }), setTimeout(() => {
+          n.focus();
+        }, 0), c = () => {
+          i(r);
+        }, t.appendChild(n), !e.entries)
+          throw new Error("entries is required");
+        e.entries.forEach((o) => {
+          let a = document.createElement("option");
+          a.classList.add("banjo-prompt-option"), a.value = o.value, a.text = o.text, n.appendChild(a);
+        });
+        break;
+      }
+      case "checkbox": {
+        if (!e.entries)
+          throw new Error("entries is required");
+        e.entries.forEach((n) => {
+          let o = document.createElement("div");
+          o.classList.add("banjo-prompt-checkbox-container"), o.style.cssText = `
+                        display: inline;
+                        align-items: left;
+                        justify-content: left;
+                        width: 80%;
+                        margin: 5px 0;
+                    `, t.appendChild(o);
+          let a = document.createElement("input");
+          a.classList.add("banjo-prompt-checkbox"), a.type = "checkbox", a.value = n.value, a.addEventListener("input", (p) => {
+            r = p.target.value;
+          }), o.appendChild(a);
+          let l = document.createElement("label");
+          l.classList.add("banjo-prompt-label"), l.innerText = n.text, o.appendChild(l);
+        }), c = () => {
+          let n = document.querySelectorAll(".banjo-prompt-checkbox:checked"), o = [];
+          n.forEach((a) => {
+            o.push(a.value);
+          }), i(o);
+        }, (s = t.querySelector("input")) == null || s.focus();
+        break;
+      }
+      case "radio": {
+        if (!e.entries)
+          throw new Error("entries is required");
+        e.entries.forEach((n) => {
+          let o = document.createElement("div");
+          o.classList.add("banjo-prompt-radio-container"), o.style.cssText = `
+                        display: flex;
+                        align-items: center;
+                        width: 100%;
+                        gap: 10px;
+                        margin-bottom: 10px;
+                    `, t.appendChild(o);
+          let a = document.createElement("input");
+          a.name = "banjo-prompt-radio", a.classList.add("banjo-prompt-radio"), a.type = "radio", a.value = n.value, a.addEventListener("input", (p) => {
+            r = p.target.value;
+          }), o.appendChild(a);
+          let l = document.createElement("label");
+          l.classList.add("banjo-prompt-label"), l.innerText = n.text, o.appendChild(l);
+        }), c = () => {
+          i(r);
+        }, (d = t.querySelector("input")) == null || d.focus();
+        break;
+      }
+      default: {
+        let n = document.createElement("input");
+        n.classList.add("banjo-prompt-input"), n.type = e.type, e.placeholder && (n.placeholder = e.placeholder), n.style.cssText = `
+                    width: 100%;
+                    border: 1px solid #ccc;
+                    border-radius: 5px;
+                    padding: 10px;
+                `, n.addEventListener("input", (o) => {
+          r = o.target.value;
+        }), t.appendChild(n), c = () => {
+          i(r);
+        }, setTimeout(() => {
+          n.focus();
+        }, 0);
+        break;
+      }
+    }
+    return { okEvent: c };
+  }
+  var x = { type: "text", entries: [{ value: "1", text: "One" }, { value: "2", text: "Two" }, { value: "3", text: "Three" }] }, $ = async (e, t = x) => {
+    if (!v())
+      throw new Error("prompt is only available in browser");
+    return t = { ...x, ...t }, new Promise((i, r) => {
+      var h;
+      let c = (h = t.default) != null ? h : void 0, { modal: s, content: d, ok: n, cancel: o } = b(e), { okEvent: a, cancelEvent: l, onValue: p } = y({ modal: s, resolve: i, value: c }), E = () => s.style.display = "flex", { okEvent: L } = w$1({ options: t, content: d, onValue: p });
+      a = L, s.addEventListener("click", (f) => {
+        f.target === s && l();
+      }), document.addEventListener("keydown", (f) => {
+        let g = s.style.display === "flex";
+        f.key === "Escape" && g && l(), f.key === "Enter" && g && a();
+      }), n.addEventListener("click", a), o.addEventListener("click", l), E();
+    });
+  };
   const w = () => "undefined" != typeof window;
   const Y = (e, n) => (n || document).querySelector(e);
   Y.exists = (e, n) => n ? !!Y(e, n) : !!Y(e), Y.all = (e, n) => Array.from((n || document).querySelectorAll(e));
@@ -232,7 +430,10 @@
     buttonContainer == null ? void 0 : buttonContainer.insertAdjacentElement("afterend", newContainer);
     newButton.addEventListener("click", async () => {
       const message = getBranch();
-      const size = prompt("Enter size", "S");
+      const size = await $("Enter size", {
+        type: "input",
+        default: "S"
+      });
       if (!size)
         return;
       await navigator.clipboard.writeText(formatMessage(message, size));

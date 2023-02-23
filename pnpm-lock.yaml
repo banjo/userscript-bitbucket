@@ -1,12 +1,13 @@
-lockfileVersion: 5.3
+lockfileVersion: 5.4
 
 specifiers:
   '@banjoanton/spa-runner': ^0.0.14
   bumpp: ^8.2.1
+  promptler: ^0.0.1
   toastler: ^0.0.4
-  typescript: ^4.9.4
-  vite: ^4.0.4
-  vite-plugin-monkey: ^2.11.1
+  typescript: ^4.9.5
+  vite: ^4.1.4
+  vite-plugin-monkey: ^2.12.0
 
 dependencies:
   '@banjoanton/spa-runner': 0.0.14
@@ -14,9 +15,10 @@ dependencies:
 
 devDependencies:
   bumpp: 8.2.1
-  typescript: 4.9.4
-  vite: 4.0.4
-  vite-plugin-monkey: 2.11.1_vite@4.0.4
+  promptler: 0.0.1
+  typescript: 4.9.5
+  vite: 4.1.4
+  vite-plugin-monkey: 2.12.0_vite@4.1.4
 
 packages:
 
@@ -565,6 +567,10 @@ packages:
       source-map-js: 1.0.2
     dev: true
 
+  /promptler/0.0.1:
+    resolution: {integrity: sha512-uoD3ij2cKto/6lrRCWO2JH+Bs0Cwp87BYBM9/sp/jjuOEgucDkf47fDonHEUTNUUdaz3MxNL8IQOvSBPu/KDaw==}
+    dev: true
+
   /prompts/2.4.2:
     resolution: {integrity: sha512-NxNv/kLguCA7p3jE8oL2aEBsrJWgAakBpgmgK6lpPWV+WuOmY6r2/zbAVnP+T8bQlA0nzHXSJSJW0Hq7ylaD2Q==}
     engines: {node: '>= 6'}
@@ -591,8 +597,8 @@ packages:
     engines: {iojs: '>=1.0.0', node: '>=0.10.0'}
     dev: true
 
-  /rollup/3.10.0:
-    resolution: {integrity: sha512-JmRYz44NjC1MjVF2VKxc0M1a97vn+cDxeqWmnwyAF4FvpjK8YFdHpaqvQB+3IxCvX05vJxKZkoMDU8TShhmJVA==}
+  /rollup/3.17.2:
+    resolution: {integrity: sha512-qMNZdlQPCkWodrAZ3qnJtvCAl4vpQ8q77uEujVCCbC/6CLB7Lcmvjq7HyiOSnf4fxTT9XgsE36oLHJBH49xjqA==}
     engines: {node: '>=14.18.0', npm: '>=8.0.0'}
     hasBin: true
     optionalDependencies:
@@ -660,14 +666,14 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
-  /typescript/4.9.4:
-    resolution: {integrity: sha512-Uz+dTXYzxXXbsFpM86Wh3dKCxrQqUcVMxwU54orwlJjOpO3ao8L7j5lH+dWfTwgCwIuM9GQ2kvVotzYJMXTBZg==}
+  /typescript/4.9.5:
+    resolution: {integrity: sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==}
     engines: {node: '>=4.2.0'}
     hasBin: true
     dev: true
 
-  /vite-plugin-monkey/2.11.1_vite@4.0.4:
-    resolution: {integrity: sha512-sdtFhIkkJjKX4Bc5/sFbimRanaYH7fs932VLV6+FsbT+bNgsZ6TBszdaHauuTDLb3HOr37SP1mgkS/NpIwmXtg==}
+  /vite-plugin-monkey/2.12.0_vite@4.1.4:
+    resolution: {integrity: sha512-lOoTj3gAgKg+d63bqQDf1k6dhJMl9hKydIwgClsGABvJV/OQbMYtuGwF3ghDNhiYul836UQboPG9aCj2tDo9lg==}
     engines: {node: ^14.18 || >= 16, pnpm: '>=6'}
     peerDependencies:
       vite: '>=3.0.0'
@@ -678,13 +684,13 @@ packages:
       mrmime: 1.0.1
       open: 8.4.0
       picocolors: 1.0.0
-      vite: 4.0.4
+      vite: 4.1.4
     transitivePeerDependencies:
       - supports-color
     dev: true
 
-  /vite/4.0.4:
-    resolution: {integrity: sha512-xevPU7M8FU0i/80DMR+YhgrzR5KS2ORy1B4xcX/cXLsvnUWvfHuqMmVU6N0YiJ4JWGRJJsLCgjEzKjG9/GKoSw==}
+  /vite/4.1.4:
+    resolution: {integrity: sha512-3knk/HsbSTKEin43zHu7jTwYWv81f8kgAL99G5NWBcA1LKvtvcVAC4JjBH1arBunO9kQka+1oGbrMKOjk4ZrBg==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
     peerDependencies:
@@ -711,7 +717,7 @@ packages:
       esbuild: 0.16.17
       postcss: 8.4.21
       resolve: 1.22.1
-      rollup: 3.10.0
+      rollup: 3.17.2
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
